@@ -17,6 +17,22 @@ public class InputReader : ScriptableObject, GameInput.IGameplayActions
 
     private GameInput _gameInput;
 
+    private void OnEnable()
+    {
+        if(_gameInput == null)
+        {
+            _gameInput = new GameInput();
+            _gameInput.Gameplay.SetCallbacks(this);
+        }
+
+        EnableGameplayInput();
+    }
+
+    private void OnDisable()
+    {
+        DisableAllInput();
+    }
+
     public void OnJump(InputAction.CallbackContext context)
     {
         if (context.phase == InputActionPhase.Performed)
@@ -30,5 +46,19 @@ public class InputReader : ScriptableObject, GameInput.IGameplayActions
         moveEvent.Invoke(context.ReadValue<Vector2>());
     }
 
-    
+    //Used by Cinemachine
+    public void OnRotateCamera(InputAction.CallbackContext context)
+    {
+       
+    }
+
+    public void EnableGameplayInput()
+    {
+        _gameInput.Gameplay.Enable();
+    }
+
+    public void DisableAllInput()
+    {
+        _gameInput.Gameplay.Disable();
+    }
 }
