@@ -2,14 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerMovement : MonoBehaviour
+public class PlayerController : MonoBehaviour
 {
     [SerializeField] private InputReader _inputReader = default; 
 
     public CharacterController controller;
     public Transform cam;
 
-  
+    [HideInInspector] public Vector3 externalMovement = Vector3.zero;
     public float moveSpeed = 6f;
     public float turnSmoothTime = 0.1f;
     private float _turnSmoothVelocity;
@@ -17,7 +17,9 @@ public class PlayerMovement : MonoBehaviour
     public float gravity = -9.81f;
     private Vector3 _velocity;
     private bool isGrounded;
-    public float jumpHeight = 3f; 
+    public float jumpHeight = 3f;
+    //private float fallMultiplier = 0.5f;
+    [Range(0, 1)] public float lowJumpMultiplier = 0.5f;
 
     public Transform groundCheck;
     public float groundRadius = 0.4f;
@@ -49,36 +51,57 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        HandleMoveInput();
+        if(direction.magnitude >= 0.1f)
+            HandleMoveInput();
+
         HandleJumpInput();
     }
 
-    private void FixedUpdate()
+    private void LateUpdate()
     {
-       
+        if (externalMovement != Vector3.zero)
+            controller.Move(externalMovement);
     }
+
+
     private void HandleMoveInput()
     {
-        if (direction.magnitude >= 0.1f)
-        {
-            //Pass in x first then y instead of y then x to get angle we want
-            float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg + cam.eulerAngles.y;
-            float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref _turnSmoothVelocity, turnSmoothTime);
-            transform.rotation = Quaternion.Euler(0f, angle, 0f);
+        //Pass in x first then y instead of y then x to get angle we want
+        float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg + cam.eulerAngles.y;
+        float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref _turnSmoothVelocity, turnSmoothTime);
+        transform.rotation = Quaternion.Euler(0f, angle, 0f);
 
-            //Give us direction we want to move in taking into account dir of camera
-            Vector3 moveDirection = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
-            controller.Move(moveDirection.normalized * moveSpeed * Time.deltaTime);
-        }
+        //Give us direction we want to move in taking into account dir of camera
+        Vector3 moveDirection = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
+        controller.Move(moveDirection.normalized * moveSpeed * Time.deltaTime);
     }
 
     private void HandleJumpInput()
     {
         isGrounded = Physics.CheckSphere(groundCheck.position, groundRadius, whatIsGround);
 
+        //B/c this might register before being completely on the ground
+        //Works better to set velocity to small number than 0
+        //to force player down on the ground
         if (isGrounded && _velocity.y < 0)
         {
+            //Reset velocity once grounded
             _velocity.y = -2f;
+        }
+
+        //TODO: Fall multiplier 
+        /*if(_velocity.y < 0 && !isGrounded)
+        {
+            Debug.Log("Applying fall multiplier");
+            Debug.Log(_velocity.y);
+            _velocity.y *= fallMultiplier;
+        }*/
+
+        //If player tapped jump key quickly
+        //Varying jump heights
+        if (_velocity.y > 0 && jumpInputStop)
+        {
+            _velocity.y *= lowJumpMultiplier;
         }
 
         if (jumpInput && isGrounded)
@@ -98,7 +121,6 @@ public class PlayerMovement : MonoBehaviour
 
     private void OnJump()
     {
-        Debug.Log("Player Jump Initiated");
         jumpInput = true;
         jumpInputStop = false;
 
@@ -106,7 +128,6 @@ public class PlayerMovement : MonoBehaviour
 
     private void OnJumpCanceled()
     {
-        Debug.Log("Player Jump Cancelled");
         jumpInputStop = true;
         jumpInput = false;
     }
