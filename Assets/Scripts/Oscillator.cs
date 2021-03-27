@@ -18,23 +18,7 @@ public class Oscillator : MonoBehaviour
         _startingPosition = transform.position;
     }
 
-    // Update is called once per frame
-    /*private void Update()
-    {
-        if(_period <= Mathf.Epsilon) { return; } //compare floating point to Mathf.Epsilon instead of 0 due to floating point precision
-
-        float cycles = Time.time / _period; //continually grows over time
-        
-        float rawSinWave = Mathf.Sin(cycles * TAU); //Will give us a value between -1 and 1
-
-        _movementFactor = (rawSinWave + 1f) / 2f; //transform to 0 and 2 then divide by 2 to get value between 0 and 1
-
-        Vector3 offset = _movementVector * _movementFactor;
-        transform.position = _startingPosition + offset;
-
-    }*/
-
-    private void FixedUpdate()
+    private void Update()
     {
         if (_period <= Mathf.Epsilon) { return; } //compare floating point to Mathf.Epsilon instead of 0 due to floating point precision
 
@@ -48,15 +32,4 @@ public class Oscillator : MonoBehaviour
         transform.position = _startingPosition + offset;
     }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.gameObject.tag == "Player")
-            other.transform.parent = transform;
-    }
-    private void OnTriggerExit(Collider other)
-    {
-        if (other.gameObject.tag == "Player")
-            other.transform.parent = null;
-
-    }
 }
