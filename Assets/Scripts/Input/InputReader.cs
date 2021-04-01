@@ -5,7 +5,7 @@ using UnityEngine.Events;
 using UnityEngine.InputSystem;
 
 [CreateAssetMenu(fileName = "InputReaderSO", menuName = "Game/Input Reader")]
-public class InputReader : ScriptableObject, GameInput.IGameplayActions
+public class InputReader : ScriptableObject, GameInput.IGameplayActions, GameInput.IDialogueActions
 {
     //Assign with delete {} to initialize with empty delegate 
     // to skip null check when we used them 
@@ -14,6 +14,10 @@ public class InputReader : ScriptableObject, GameInput.IGameplayActions
     public event UnityAction<Vector2> moveEvent = delegate { };
     public event UnityAction jumpEvent = delegate { };
     public event UnityAction jumpCanceledEvent = delegate { };
+    public event UnityAction interactionEvent = delegate { };
+
+    //Dialogue
+    public event UnityAction advanceDialogueEvent = delegate { };
 
     private GameInput _gameInput;
 
@@ -23,6 +27,7 @@ public class InputReader : ScriptableObject, GameInput.IGameplayActions
         {
             _gameInput = new GameInput();
             _gameInput.Gameplay.SetCallbacks(this);
+            _gameInput.Dialogue.SetCallbacks(this);
         }
 
         EnableGameplayInput();
@@ -51,14 +56,39 @@ public class InputReader : ScriptableObject, GameInput.IGameplayActions
     {
        
     }
+    public void OnAdvanceDialogue(InputAction.CallbackContext context)
+    {
+        if (context.phase == InputActionPhase.Performed)
+        {
+
+            advanceDialogueEvent();
+        }
+    }
+    public void OnInteract(InputAction.CallbackContext context)
+    {
+        if (context.phase == InputActionPhase.Performed)
+            interactionEvent.Invoke();
+            
+    }
 
     public void EnableGameplayInput()
     {
         _gameInput.Gameplay.Enable();
+
+        _gameInput.Dialogue.Disable();
+    }
+
+    public void EnableDialogueInput()
+    {
+        _gameInput.Dialogue.Enable();
+
+        _gameInput.Gameplay.Disable();
     }
 
     public void DisableAllInput()
     {
         _gameInput.Gameplay.Disable();
+        _gameInput.Dialogue.Disable();
     }
+
 }

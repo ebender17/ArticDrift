@@ -4,7 +4,7 @@ using UnityEngine;
 public class VoidEventChannelSO : ScriptableObject
 {
     public VoidEventAction OnEventRaised;
-    public void VoidRaiseEvent()
+    public void RaiseEvent()
     {
         if (OnEventRaised != null)
             OnEventRaised.Invoke();

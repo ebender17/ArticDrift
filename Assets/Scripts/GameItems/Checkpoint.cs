@@ -7,7 +7,7 @@ public class Checkpoint : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         Debug.Log("Checkpoint trigger entered!");
-        GameLogic player = other.gameObject.GetComponent<GameLogic>();
+        GameController player = other.gameObject.GetComponent<GameController>();
         if(player != null)
         {
             player.CurrentCheckpoint = transform.position;

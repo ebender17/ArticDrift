@@ -70,7 +70,6 @@ public class MovingPlatform : MonoBehaviour
     {
         if(other.gameObject.tag == "Player")
         {
-            Debug.Log("Entered Trigger");
             other.transform.parent = transform;
         }
     }
@@ -79,8 +78,6 @@ public class MovingPlatform : MonoBehaviour
     {
         if(other.gameObject.tag == "Player")
         {
-            Debug.Log("Exited Trigger");
-
             other.transform.parent = null;
         }
     }

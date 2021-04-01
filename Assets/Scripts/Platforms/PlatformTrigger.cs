@@ -8,6 +8,7 @@ public class PlatformTrigger : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        Debug.Log("Triggered platform trigger.");
         platform.NextPlatform();
     }
 
