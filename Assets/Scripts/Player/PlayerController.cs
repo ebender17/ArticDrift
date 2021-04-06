@@ -123,6 +123,7 @@ public class PlayerController : MonoBehaviour
     {
         jumpInput = true;
         jumpInputStop = false;
+        Debug.Log("Jump pressed!");
 
     }
 

@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 68fcb27fde79e6642a3f1a40e5fdec28, type: 3}
-  m_Name: PenguinDialogue
+  m_Name: HelpSignLvl1
   m_EditorClassIdentifier: 
-  _actor: {fileID: 11400000, guid: 192d4e302fda3654eb37bda68a8ee82a, type: 2}
+  _actor: {fileID: 11400000, guid: 4336a467f71883f4595c3b776d73abe9, type: 2}
   _dialogueLines:
-  - Are you going out to collect food? Be careful on your journey!
-  - The warm temperatures are causing ice to melt. I understand you are hungry, but
-    be careful!
-  _dialogueType: 3
+  - Press Q to open the in-game menu. Press space to advance dialogue.
+  - Use WASD or the arrow keys to move. Use spacebar to jump.
+  - Collect as much food as you can before finding the checkpoint.
+  _dialogueType: 0

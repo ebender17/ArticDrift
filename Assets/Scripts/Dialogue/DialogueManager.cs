@@ -51,7 +51,6 @@ public class DialogueManager : MonoBehaviour
         _inputReader.EnableDialogueInput();
         _inputReader.advanceDialogueEvent += OnAdvance;
         _currentDialogue = dialogueDataSO;
-        Debug.Log("Inside begin dialogue");
 
     }
 
@@ -71,12 +70,10 @@ public class DialogueManager : MonoBehaviour
 
     private void OnAdvance()
     {
-        Debug.Log("Inside on advance.");
         _counter++;
 
         if(!_reachedEndOfDialogue)
         {
-            Debug.Log("Inside have not reached end of dialogue");
             DisplayDialogueLine(_currentDialogue.DialogueLines[_counter], _currentDialogue.Actor);
 
         }
