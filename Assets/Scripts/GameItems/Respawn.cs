@@ -2,16 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Checkpoint : MonoBehaviour
+public class Respawn : MonoBehaviour
 {
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("Checkpoint trigger entered!");
+        Debug.Log("Respawn trigger entered!");
         GameController gc = other.gameObject.GetComponent<GameController>();
-        if(gc != null)
+        
+        if (gc != null)
         {
-            gc.CurrentCheckpoint = transform.position;
+            gc.PlayerFallRespawn();
         }
-
     }
 }

@@ -8,8 +8,11 @@ public class PlatformTrigger : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("Triggered platform trigger.");
-        platform.NextPlatform();
+        if(other.gameObject.tag == "Player")
+        {
+            Debug.Log("Triggered platform trigger.");
+            platform.NextPlatform();
+        }
     }
 
 }

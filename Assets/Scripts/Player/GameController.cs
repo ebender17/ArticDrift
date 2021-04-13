@@ -37,23 +37,20 @@ public class GameController : MonoBehaviour
     }
     private void Update()
     {
-        CheckPlayerPosition();
+        //CheckPlayerPosition();
     }
 
-    private void CheckPlayerPosition()
+    public void PlayerFallRespawn()
     {
-        if (transform.position.y < SCENE_MIN_HEIGHT)
-        {
-            TakeDamage(FALL_DAMAGE);
+        TakeDamage(FALL_DAMAGE);
 
-            if(_currentHealth > 0)
-                LoadLastCheckPoint(); //TODO: Checkpoint system and camera smooth
-        }
-            
+        if(_currentHealth > 0)
+            LoadLastCheckPoint(); //TODO: Checkpoint system and camera smooth     
     }
 
     private void LoadLastCheckPoint()
     {
+        Debug.Log("Inside load last checkpoint" + _currentCheckpoint);
         transform.position = _currentCheckpoint;
     }
 

@@ -8,6 +8,7 @@ public class PlayerController : MonoBehaviour
 
     public CharacterController controller;
     public Transform cam;
+    private Animator anim;
 
     [HideInInspector] public Vector3 externalMovement = Vector3.zero;
     public float moveSpeed = 6f;
@@ -45,14 +46,24 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        anim = GetComponent<Animator>();
     }
 
     // Update is called once per frame
     void Update()
     {
         if(direction.magnitude >= 0.1f)
+        {
             HandleMoveInput();
+
+            if(isGrounded)
+                anim.SetBool("isRunning", true);
+        }
+        else
+        {
+            anim.SetBool("isRunning", false);
+        }
+            
 
         HandleJumpInput();
     }
@@ -87,6 +98,7 @@ public class PlayerController : MonoBehaviour
         {
             //Reset velocity once grounded
             _velocity.y = -2f;
+            anim.SetBool("isJumping", false);
         }
 
         //TODO: Fall multiplier 
@@ -107,6 +119,7 @@ public class PlayerController : MonoBehaviour
         if (jumpInput && isGrounded)
         {
             _velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
+            anim.SetBool("isJumping", true);
         }
 
         _velocity.y += gravity * Time.deltaTime;
