@@ -29,6 +29,7 @@ public class PlayerController : MonoBehaviour
     [HideInInspector] public bool jumpInput;
     [HideInInspector] public bool jumpInputStop;
 
+
     private void OnEnable()
     {
         _inputReader.jumpEvent += OnJump;
@@ -91,6 +92,21 @@ public class PlayerController : MonoBehaviour
             //Reset velocity once grounded
             _velocity.y = -2f;
             anim.SetBool("isJumping", false);
+            
+        }
+
+
+        //If player tapped jump key quickly
+        //Varying jump heights
+        if (_velocity.y > 0 && jumpInputStop)
+        {
+            _velocity.y *= lowJumpMultiplier;
+        } 
+
+        if (jumpInput && isGrounded)
+        {
+            _velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
+            anim.SetBool("isJumping", true);
         }
 
         //when velcity is less than 0 we are falling and want to apply more "gravity" for a snappier look
@@ -106,21 +122,9 @@ public class PlayerController : MonoBehaviour
             controller.Move(_velocity * Time.deltaTime);
         }
 
-        //If player tapped jump key quickly
-        //Varying jump heights
-        if (_velocity.y > 0 && jumpInputStop)
-        {
-            _velocity.y *= lowJumpMultiplier;
-        } 
 
-        if (jumpInput && isGrounded)
-        {
-            _velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
-            anim.SetBool("isJumping", true);
-        }
-
-        
     }
+
 
     //------ Event Listeners ------
     private void OnMove(Vector2 movement)
