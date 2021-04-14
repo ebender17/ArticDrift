@@ -10,7 +10,6 @@ public class PlayerController : MonoBehaviour
     public Transform cam;
     private Animator anim;
 
-    [HideInInspector] public Vector3 externalMovement = Vector3.zero;
     public float moveSpeed = 6f;
     public float turnSmoothTime = 0.1f;
     private float _turnSmoothVelocity;
@@ -18,9 +17,9 @@ public class PlayerController : MonoBehaviour
     public float gravity = -9.81f;
     private Vector3 _velocity;
     private bool isGrounded;
-    public float jumpHeight = 3f;
-    //private float fallMultiplier = 0.5f;
-    [Range(0, 1)] public float lowJumpMultiplier = 0.5f;
+    [SerializeField] public float jumpHeight = 3f;
+    public float fallMultiplier = 2.5f; //How much we multiply gravity by when character is falling down
+    [Range(0, 1)] public float lowJumpMultiplier = 0.5f; //When we release button early and want to increase gravity so character does not jump quiete as high
 
     public Transform groundCheck;
     public float groundRadius = 0.4f;
@@ -28,7 +27,7 @@ public class PlayerController : MonoBehaviour
 
     [HideInInspector] public Vector3 direction;
     [HideInInspector] public bool jumpInput;
-    [HideInInspector] public bool jumpInputStop; 
+    [HideInInspector] public bool jumpInputStop;
 
     private void OnEnable()
     {
@@ -68,12 +67,6 @@ public class PlayerController : MonoBehaviour
         HandleJumpInput();
     }
 
-    private void LateUpdate()
-    {
-        if (externalMovement != Vector3.zero)
-            controller.Move(externalMovement);
-    }
-
 
     private void HandleMoveInput()
     {
@@ -91,9 +84,8 @@ public class PlayerController : MonoBehaviour
     {
         isGrounded = Physics.CheckSphere(groundCheck.position, groundRadius, whatIsGround);
 
-        //B/c this might register before being completely on the ground
-        //Works better to set velocity to small number than 0
-        //to force player down on the ground
+        //This might register before being completely on the ground. Therefore, works better to set velocity to smaller number than 0...
+        //to force player down on the ground.
         if (isGrounded && _velocity.y < 0)
         {
             //Reset velocity once grounded
@@ -101,20 +93,25 @@ public class PlayerController : MonoBehaviour
             anim.SetBool("isJumping", false);
         }
 
-        //TODO: Fall multiplier 
-        /*if(_velocity.y < 0 && !isGrounded)
+        //when velcity is less than 0 we are falling and want to apply more "gravity" for a snappier look
+        if (_velocity.y < 0 && !isGrounded)
         {
-            Debug.Log("Applying fall multiplier");
-            Debug.Log(_velocity.y);
-            _velocity.y *= fallMultiplier;
-        }*/
+            _velocity.y += fallMultiplier * gravity * Time.deltaTime;
+
+            controller.Move(_velocity * Time.deltaTime);
+        }
+        else
+        {
+            _velocity.y += gravity * Time.deltaTime;
+            controller.Move(_velocity * Time.deltaTime);
+        }
 
         //If player tapped jump key quickly
         //Varying jump heights
         if (_velocity.y > 0 && jumpInputStop)
         {
             _velocity.y *= lowJumpMultiplier;
-        }
+        } 
 
         if (jumpInput && isGrounded)
         {
@@ -122,8 +119,7 @@ public class PlayerController : MonoBehaviour
             anim.SetBool("isJumping", true);
         }
 
-        _velocity.y += gravity * Time.deltaTime;
-        controller.Move(_velocity * Time.deltaTime);
+        
     }
 
     //------ Event Listeners ------

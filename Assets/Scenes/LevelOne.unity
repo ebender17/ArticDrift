@@ -651,11 +651,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4791622373211060434, guid: 9eac4dc6d29b3a84c81a55e3669f52ce, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.0000000021466342
+      value: 0.0000000021466342
       objectReference: {fileID: 0}
     - target: {fileID: 4791622373211060434, guid: 9eac4dc6d29b3a84c81a55e3669f52ce, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 1.3376288e-10
+      value: -1.3376288e-10
       objectReference: {fileID: 0}
     - target: {fileID: 4791622373375407944, guid: 9eac4dc6d29b3a84c81a55e3669f52ce, type: 3}
       propertyPath: m_LocalRotation.x
@@ -3231,10 +3231,6 @@ PrefabInstance:
       propertyPath: cam
       value: 
       objectReference: {fileID: 1324204666}
-    - target: {fileID: 5352880481079194256, guid: 828a34cd472c9674880d7eddcfeeea5e, type: 3}
-      propertyPath: gravity
-      value: -19.62
-      objectReference: {fileID: 0}
     - target: {fileID: 5354129172254928417, guid: 828a34cd472c9674880d7eddcfeeea5e, type: 3}
       propertyPath: m_Name
       value: Polar Bear

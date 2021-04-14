@@ -1292,11 +1292,11 @@ MonoBehaviour:
   _inputReader: {fileID: 11400000, guid: dc5340c919cfe014aae11a83e5ec0d71, type: 2}
   controller: {fileID: 5454998311486055575}
   cam: {fileID: 0}
-  externalMovement: {x: 0, y: 0, z: 0}
   moveSpeed: 6
   turnSmoothTime: 0.1
   gravity: -9.81
-  jumpHeight: 3
+  jumpHeight: 7
+  fallMultiplier: 3.5
   lowJumpMultiplier: 0.5
   groundCheck: {fileID: 5352880480605703229}
   groundRadius: 0.4
