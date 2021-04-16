@@ -136,7 +136,7 @@ GameObject:
   - component: {fileID: 66031168}
   - component: {fileID: 66031167}
   m_Layer: 5
-  m_Name: InfoButton
+  m_Name: CreditsButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -302,7 +302,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: -33.7}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &555225433
@@ -362,12 +362,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Move: A and D Keys or Left and Right Keys
-
-    Jump: W Key or Up Arrow
-    Key
-
-    Camera: Mouse'
+  m_text: "Game Design: Emily Bender \nGame Programming: Emily Bender \nArt: Emily
+    Bender, MalberS Animations, and LMHPOLY\nSounds: FreeSounds.org"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 4c006b38b9b6c5540aa65baa9bcf6143, type: 2}
   m_sharedMaterial: {fileID: 6685525188499242722, guid: 4c006b38b9b6c5540aa65baa9bcf6143, type: 2}
@@ -850,6 +846,7 @@ GameObject:
   - component: {fileID: 827639274}
   - component: {fileID: 827639276}
   - component: {fileID: 827639275}
+  - component: {fileID: 827639277}
   m_Layer: 5
   m_Name: MainPanel
   m_TagString: Untagged
@@ -917,6 +914,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 827639273}
   m_CullTransparentMesh: 1
+--- !u!114 &827639277
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 827639273}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 32c727efa5d9f2143856dad602593af7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &980446586
 GameObject:
   m_ObjectHideFlags: 0
@@ -929,7 +938,7 @@ GameObject:
   - component: {fileID: 980446589}
   - component: {fileID: 980446588}
   m_Layer: 5
-  m_Name: InfoText
+  m_Name: CreditsText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -974,7 +983,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Information
+  m_text: Credits
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 4c006b38b9b6c5540aa65baa9bcf6143, type: 2}
   m_sharedMaterial: {fileID: 6685525188499242722, guid: 4c006b38b9b6c5540aa65baa9bcf6143, type: 2}
@@ -1160,7 +1169,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 64}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1411817191
@@ -1283,7 +1292,6 @@ GameObject:
   - component: {fileID: 1614552472}
   - component: {fileID: 1614552471}
   - component: {fileID: 1614552470}
-  - component: {fileID: 1614552473}
   m_Layer: 5
   m_Name: QuitButton
   m_TagString: Untagged
@@ -1355,8 +1363,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1614552473}
-        m_TargetAssemblyTypeName: QuitGame, Assembly-CSharp
+      - m_Target: {fileID: 827639277}
+        m_TargetAssemblyTypeName: SceneHandlers, Assembly-CSharp
         m_MethodName: Quit
         m_Mode: 1
         m_Arguments:
@@ -1405,18 +1413,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1614552468}
   m_CullTransparentMesh: 1
---- !u!114 &1614552473
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1614552468}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b5891b7dcecdafc489164044430769a9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &2052789313
 GameObject:
   m_ObjectHideFlags: 0
@@ -1451,7 +1447,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0, y: -113}
+  m_AnchoredPosition: {x: 0, y: -182.27545}
   m_SizeDelta: {x: 714.222, y: 208.88904}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &2052789315
@@ -1563,7 +1559,7 @@ GameObject:
   - component: {fileID: 2091190888}
   - component: {fileID: 2091190887}
   m_Layer: 5
-  m_Name: MainMenuText
+  m_Name: BackText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1608,7 +1604,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: '> Main Menu'
+  m_text: '> Back'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 4c006b38b9b6c5540aa65baa9bcf6143, type: 2}
   m_sharedMaterial: {fileID: 6685525188499242722, guid: 4c006b38b9b6c5540aa65baa9bcf6143, type: 2}

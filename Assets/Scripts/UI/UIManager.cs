@@ -11,9 +11,6 @@ public class UIManager : MonoBehaviour
     [Header("Game Result Events")]
     [SerializeField] private GameResultChannelSO _gameResultChannel = default;
 
-    [Header("Level Result Events")]
-    [SerializeField] private VoidEventChannelSO _levelResultEvent = default;
-
     [Header("Health Event")]
     [SerializeField] private IntEventChannelSO _changeHealthUIEvent = default;
 
@@ -40,8 +37,6 @@ public class UIManager : MonoBehaviour
             _closeUIDialogueEvent.OnEventRaised += CloseUIDialogue;
         if (_setInteractionEvent != null)
             _setInteractionEvent.OnEventRaised += SetInteractionPanel;
-        if (_levelResultEvent != null)
-            _levelResultEvent.OnEventRaised += SetLevelCompletePanel;
     }
 
     private void OnDisable()
@@ -58,8 +53,6 @@ public class UIManager : MonoBehaviour
             _closeUIDialogueEvent.OnEventRaised -= CloseUIDialogue;
         if (_setInteractionEvent != null)
             _setInteractionEvent.OnEventRaised -= SetInteractionPanel;
-        if (_levelResultEvent != null)
-            _levelResultEvent.OnEventRaised -= SetLevelCompletePanel;
     }
 
     [Header("UI Panel Controllers")]
@@ -112,5 +105,4 @@ public class UIManager : MonoBehaviour
         _interactionPanel.gameObject.SetActive(isOpen);
     }
 
-    private void SetLevelCompletePanel() => _levelCompletePanel.SetActive(true);
 }

@@ -10,12 +10,14 @@ public class PlayerController : MonoBehaviour
     public Transform cam;
     private Animator anim;
 
+    private Vector3 _currentMoveVelocity = Vector3.zero;
+    private Vector3 _moveVelocity;
     public float moveSpeed = 6f;
     public float turnSmoothTime = 0.1f;
     private float _turnSmoothVelocity;
 
     public float gravity = -9.81f;
-    private Vector3 _velocity;
+    public Vector3 velocity;
     private bool isGrounded;
     [SerializeField] public float jumpHeight = 3f;
     public float fallMultiplier = 2.5f; //How much we multiply gravity by when character is falling down
@@ -28,6 +30,9 @@ public class PlayerController : MonoBehaviour
     [HideInInspector] public Vector3 direction;
     [HideInInspector] public bool jumpInput;
     [HideInInspector] public bool jumpInputStop;
+
+    [Range(0, 1)] public float iceFriction = 1; //between 0 and 1, 0 means no friction
+    private bool _applyFriction;
 
 
     private void OnEnable()
@@ -63,6 +68,12 @@ public class PlayerController : MonoBehaviour
         {
             anim.SetBool("isRunning", false);
         }
+
+        //Want to continue applying movement if on icy ground
+        if(_applyFriction)
+        {
+            HandleSurfaceFriction();
+        }
             
 
         HandleJumpInput();
@@ -78,7 +89,27 @@ public class PlayerController : MonoBehaviour
 
         //Give us direction we want to move in taking into account dir of camera
         Vector3 moveDirection = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
-        controller.Move(moveDirection.normalized * moveSpeed * Time.deltaTime);
+        
+        _moveVelocity = moveDirection.normalized * moveSpeed;
+
+        if(_applyFriction)
+        {
+            HandleSurfaceFriction();
+        }
+        else
+        {
+            controller.Move(_moveVelocity * Time.deltaTime);
+        }
+        
+    }
+
+    //Simple function to give slippery ice effect 
+    private void HandleSurfaceFriction()
+    {
+        _currentMoveVelocity = Vector3.Lerp(_currentMoveVelocity, _moveVelocity, iceFriction * Time.deltaTime);
+
+        controller.Move(_currentMoveVelocity * Time.deltaTime);
+
     }
 
     private void HandleJumpInput()
@@ -87,10 +118,10 @@ public class PlayerController : MonoBehaviour
 
         //This might register before being completely on the ground. Therefore, works better to set velocity to smaller number than 0...
         //to force player down on the ground.
-        if (isGrounded && _velocity.y < 0)
+        if (isGrounded && velocity.y < 0)
         {
             //Reset velocity once grounded
-            _velocity.y = -2f;
+            velocity.y = -2f;
             anim.SetBool("isJumping", false);
             
         }
@@ -98,28 +129,28 @@ public class PlayerController : MonoBehaviour
 
         //If player tapped jump key quickly
         //Varying jump heights
-        if (_velocity.y > 0 && jumpInputStop)
+        if (velocity.y > 0 && jumpInputStop)
         {
-            _velocity.y *= lowJumpMultiplier;
+            velocity.y *= lowJumpMultiplier;
         } 
 
         if (jumpInput && isGrounded)
         {
-            _velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
+            velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
             anim.SetBool("isJumping", true);
         }
 
         //when velcity is less than 0 we are falling and want to apply more "gravity" for a snappier look
-        if (_velocity.y < 0 && !isGrounded)
+        if (velocity.y < 0 && !isGrounded)
         {
-            _velocity.y += fallMultiplier * gravity * Time.deltaTime;
+            velocity.y += fallMultiplier * gravity * Time.deltaTime;
 
-            controller.Move(_velocity * Time.deltaTime);
+            controller.Move(velocity * Time.deltaTime);
         }
         else
         {
-            _velocity.y += gravity * Time.deltaTime;
-            controller.Move(_velocity * Time.deltaTime);
+            velocity.y += gravity * Time.deltaTime;
+            controller.Move(velocity * Time.deltaTime);
         }
 
 
@@ -144,6 +175,26 @@ public class PlayerController : MonoBehaviour
     {
         jumpInputStop = true;
         jumpInput = false;
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        Debug.Log("Entered ice.");
+        if (other.transform.tag == "Ice")
+        {
+            Debug.Log("Entered ice and ice tag detected.");
+            //_friction = 0.1f;
+            _applyFriction = true;
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if(other.transform.tag == "Ice")
+        {
+            //_friction = 1;
+            _applyFriction = false;
+        }
     }
 
 }

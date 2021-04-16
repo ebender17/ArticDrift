@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class GameController : MonoBehaviour
 {
+    private CharacterController _cc;
+    private PlayerController _playerController;
     public int collectableCount { get; private set; } = 0;
     public const int MAX_HEALTH = 100;
     public const int FALL_DAMAGE = 20;
@@ -23,15 +25,14 @@ public class GameController : MonoBehaviour
     [SerializeField] private IntEventChannelSO _changeHealthUIEvent;
     //did not make seperate GameManager b/c small scope of project
     [SerializeField] private GameResultChannelSO _gameResultEvent; //picked up by UI Manager
-    [SerializeField] private VoidEventChannelSO _loadLevelEvent;
 
-    private void Awake()
-    {
-        _currentHealth = MAX_HEALTH;
-        _changeHealthUIEvent.RaiseEvent(_currentHealth);
-    }
     private void Start()
     {
+        _cc = GetComponent<CharacterController>();
+        _playerController = GetComponent<PlayerController>();
+
+        _currentHealth = MAX_HEALTH;
+        _changeHealthUIEvent.RaiseEvent(_currentHealth);
         _currentCheckpoint = transform.position;
 
     }
@@ -44,14 +45,19 @@ public class GameController : MonoBehaviour
     {
         TakeDamage(FALL_DAMAGE);
 
-        if(_currentHealth > 0)
-            LoadLastCheckPoint(); //TODO: Checkpoint system and camera smooth     
+        if (_currentHealth > 0)
+            LoadLastCheckPoint(); //TODO: Checkpoint system   
     }
 
     private void LoadLastCheckPoint()
     {
-        Debug.Log("Inside load last checkpoint" + _currentCheckpoint);
+        //Character controller will ignore transform.position =, therefore I disabled and enaled it while loading checkpoint
+        _cc.enabled = false;
         transform.position = _currentCheckpoint;
+        _cc.enabled = true;
+
+        _playerController.velocity = Vector3.zero;
+
     }
 
 
@@ -78,15 +84,12 @@ public class GameController : MonoBehaviour
     {
         _gameResultEvent.RaiseEvent(false, collectableCount);
         
-        //TODO: Start Courtine to load end scene
         Destroy(gameObject);
     }
 
     public void LevelComplete()
     {
-        _loadLevelEvent.RaiseEvent(); //picked up by UI manager to display level complete UI before moving to next scene
-        
-        //TODO: Start Courotine to load next scene
+        _gameResultEvent.RaiseEvent(true, collectableCount);
     }
 
     private void OnTriggerEnter(Collider other)

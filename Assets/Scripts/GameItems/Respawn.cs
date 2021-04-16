@@ -6,12 +6,15 @@ public class Respawn : MonoBehaviour
 {
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("Respawn trigger entered!");
-        GameController gc = other.gameObject.GetComponent<GameController>();
-        
-        if (gc != null)
+        if (other.gameObject.tag == "Player")
         {
-            gc.PlayerFallRespawn();
+            GameController gc = other.gameObject.GetComponent<GameController>();
+
+            if (gc != null)
+            {
+                gc.PlayerFallRespawn();
+            }
         }
+        
     }
 }

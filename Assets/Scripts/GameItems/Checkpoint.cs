@@ -6,12 +6,13 @@ public class Checkpoint : MonoBehaviour
 {
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("Checkpoint trigger entered!");
-        GameController gc = other.gameObject.GetComponent<GameController>();
-        if(gc != null)
+        if (other.gameObject.tag == "Player")
         {
-            gc.CurrentCheckpoint = transform.position;
+            GameController gc = other.gameObject.GetComponent<GameController>();
+            if (gc != null)
+            {
+                gc.CurrentCheckpoint = transform.position;
+            }
         }
-
     }
 }

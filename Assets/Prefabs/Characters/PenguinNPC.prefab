@@ -1215,10 +1215,9 @@ GameObject:
   m_Component:
   - component: {fileID: 5371529879411499638}
   - component: {fileID: 5463054922960328322}
-  - component: {fileID: 5449997394544675654}
-  - component: {fileID: 5409939961269006294}
   - component: {fileID: 5369453017594936257}
   - component: {fileID: 5369453017594936262}
+  - component: {fileID: 130620978}
   m_Layer: 7
   m_Name: PenguinNPC
   m_TagString: NPC
@@ -1233,7 +1232,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5369015447700628482}
-  m_LocalRotation: {x: -0, y: 0.99999464, z: -0, w: 0.0032745975}
+  m_LocalRotation: {x: 0, y: 0.99999464, z: 0, w: 0.00327253}
   m_LocalPosition: {x: -11.183749, y: 0.8932352, z: -28.1861}
   m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
   m_Children:
@@ -1260,121 +1259,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!82 &5449997394544675654
-AudioSource:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5369015447700628482}
-  m_Enabled: 1
-  serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
-  m_Volume: 1
-  m_Pitch: 1
-  Loop: 0
-  Mute: 0
-  Spatialize: 0
-  SpatializePostEffects: 0
-  Priority: 128
-  DopplerLevel: 1
-  MinDistance: 1
-  MaxDistance: 500
-  Pan2D: 0
-  rolloffMode: 0
-  BypassEffects: 1
-  BypassListenerEffects: 0
-  BypassReverbZones: 0
-  rolloffCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 1
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  panLevelCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 0
-  spreadCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 0
-  reverbZoneMixCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 0
---- !u!114 &5409939961269006294
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5369015447700628482}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0ca804d6b18f6d4db4ebe14203336f1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  animalSound: {fileID: 8300000, guid: e213f073542414fcbbb5795da66a953a, type: 3}
-  walking: {fileID: 8300000, guid: 231f5e48c4f0c49ec9d12e4698c08e8a, type: 3}
-  eating: {fileID: 0}
-  running: {fileID: 8300000, guid: 231f5e48c4f0c49ec9d12e4698c08e8a, type: 3}
-  attacking: {fileID: 0}
-  death: {fileID: 0}
-  sleeping: {fileID: 0}
 --- !u!136 &5369453017594936257
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -1404,6 +1288,20 @@ MonoBehaviour:
   _actor: {fileID: 11400000, guid: 192d4e302fda3654eb37bda68a8ee82a, type: 2}
   _dialogue: {fileID: 11400000, guid: 9b0229e8acd0e4744b4ea8b96e53538e, type: 2}
   _startDialogueEvent: {fileID: 11400000, guid: d3cbd25e569579e4592f35df0ed3017b, type: 2}
+--- !u!114 &130620978
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5369015447700628482}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 63e527fd3c1be4843a5508f9d37d88ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _playSFXChannel: {fileID: 11400000, guid: 3766b65767559b44c8599e9a359a8226, type: 2}
+  _animalSounds: {fileID: 11400000, guid: eaaf2d4913d8b8d49a7d1df5bc36ed68, type: 2}
 --- !u!1 &5369079710592033470
 GameObject:
   m_ObjectHideFlags: 0
