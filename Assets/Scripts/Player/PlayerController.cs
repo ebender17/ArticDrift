@@ -17,7 +17,7 @@ public class PlayerController : MonoBehaviour
     private float _turnSmoothVelocity;
 
     public float gravity = -9.81f;
-    public Vector3 velocity;
+    [HideInInspector] public Vector3 velocity;
     private bool isGrounded;
     [SerializeField] public float jumpHeight = 3f;
     public float fallMultiplier = 2.5f; //How much we multiply gravity by when character is falling down
@@ -167,7 +167,6 @@ public class PlayerController : MonoBehaviour
     {
         jumpInput = true;
         jumpInputStop = false;
-        Debug.Log("Jump pressed!");
 
     }
 
@@ -179,11 +178,9 @@ public class PlayerController : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("Entered ice.");
         if (other.transform.tag == "Ice")
         {
             Debug.Log("Entered ice and ice tag detected.");
-            //_friction = 0.1f;
             _applyFriction = true;
         }
     }
@@ -192,7 +189,6 @@ public class PlayerController : MonoBehaviour
     {
         if(other.transform.tag == "Ice")
         {
-            //_friction = 1;
             _applyFriction = false;
         }
     }
