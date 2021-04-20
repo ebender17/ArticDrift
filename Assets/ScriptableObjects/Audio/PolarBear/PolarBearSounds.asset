@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 084ff6215cfd25d4ba136491ba84d502, type: 3}
+  m_Name: PolarBearSounds
+  m_EditorClassIdentifier: 
+  idle: {fileID: 11400000, guid: ca0dd6d04532fe248922f4041f9b8ea2, type: 2}
+  fishPickup: {fileID: 11400000, guid: 2b91e875884a58b4fbce32abab19045d, type: 2}
+  iceJump: {fileID: 11400000, guid: 7b52c99d6f996304db8c660a83b98472, type: 2}
+  iceLand: {fileID: 11400000, guid: 653b15aa09ae61847833acb0b02d39f0, type: 2}
+  snowJump: {fileID: 11400000, guid: 347cfd9b9a93c1c409486738009f1964, type: 2}
+  snowLand: {fileID: 11400000, guid: e235329f715f5b84e90f2a373373129b, type: 2}
+  snowFootsteps:
+  - {fileID: 11400000, guid: 347cfd9b9a93c1c409486738009f1964, type: 2}
+  - {fileID: 11400000, guid: e235329f715f5b84e90f2a373373129b, type: 2}
+  - {fileID: 11400000, guid: 8ee8c72053196ba458ce24d40161afbb, type: 2}
+  - {fileID: 11400000, guid: 4c3cf64ccd303594e80a0b49b1cee994, type: 2}
+  iceFootsteps:
+  - {fileID: 11400000, guid: 849c7b97011e9844d91a667147580a07, type: 2}
+  - {fileID: 11400000, guid: bedcf8eb53fc94b45a268835ac7706fb, type: 2}

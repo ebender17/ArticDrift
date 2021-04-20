@@ -7,6 +7,7 @@ public class AudioManager : MonoBehaviour
     [Header("Listening on channels")]
     [SerializeField] private AudioSoundEventChannelSO _playMusicEvent = default;
     [SerializeField] private AudioSoundEventChannelSO _playSFXEvent = default;
+    [SerializeField] private AudioSoundsEventChannelSO _playSFXRandomEvent = default;
 
     [SerializeField]
     private bool muteSound;
@@ -23,27 +24,29 @@ public class AudioManager : MonoBehaviour
     {
         _playMusicEvent.OnEventRaised += PlaySound;
         _playSFXEvent.OnEventRaised += PlaySound;
+        _playSFXRandomEvent.OnEventRaised += SelectSound;
     }
 
     private void OnDisable()
     {
         _playMusicEvent.OnEventRaised -= PlaySound;
         _playSFXEvent.OnEventRaised -= PlaySound;
+        _playSFXRandomEvent.OnEventRaised -= SelectSound;
     }
 
     private void Awake()
-        {
+    {
 
-            for (int i = 0; i < objectPoolLength; i++)
-            {
-                GameObject soundObject = new GameObject();
-                soundObject.transform.SetParent(transform);
-                soundObject.name = "Sound Effect";
-                AudioSource audioSource = soundObject.AddComponent<AudioSource>();
-                audioSource.gameObject.SetActive(false);
-                pool.Add(audioSource);
-            }
+        for (int i = 0; i < objectPoolLength; i++)
+        {
+            GameObject soundObject = new GameObject();
+            soundObject.transform.SetParent(transform);
+            soundObject.name = "Sound Effect";
+            AudioSource audioSource = soundObject.AddComponent<AudioSource>();
+            audioSource.gameObject.SetActive(false);
+            pool.Add(audioSource);
         }
+    }
 
     public void PlaySound(Sound audio, Vector3 pos)
     {
@@ -105,6 +108,20 @@ public class AudioManager : MonoBehaviour
         source.loop = audio.loop;
         source.outputAudioMixerGroup = audio.audioMixerGroup;
 
+    }
+
+    public void SelectSound(Sound[] clips, Vector3 pos)
+    {
+        Sound audio = GetRandomClip(clips);
+        PlaySound(audio, pos);
+
+        Debug.Log("Select Sound called.");
+    }
+
+    private Sound GetRandomClip(Sound[] clips)
+    {
+        Debug.Log("Get Random Clip called.");
+        return clips[UnityEngine.Random.Range(0, clips.Length)]; 
     }
 
     private IEnumerator ReturnToPool(GameObject obj, float delay)

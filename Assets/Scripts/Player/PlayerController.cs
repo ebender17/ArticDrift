@@ -18,21 +18,31 @@ public class PlayerController : MonoBehaviour
 
     public float gravity = -9.81f;
     [HideInInspector] public Vector3 velocity;
-    private bool isGrounded;
+    private bool _isGrounded;
+    public bool IsGrounded
+    {
+        get { return _isGrounded; }
+    }
     [SerializeField] public float jumpHeight = 3f;
     public float fallMultiplier = 2.5f; //How much we multiply gravity by when character is falling down
     [Range(0, 1)] public float lowJumpMultiplier = 0.5f; //When we release button early and want to increase gravity so character does not jump quiete as high
 
     public Transform groundCheck;
     public float groundRadius = 0.4f;
-    public LayerMask whatIsGround; 
+    public LayerMask whatIsGround;
 
     [HideInInspector] public Vector3 direction;
     [HideInInspector] public bool jumpInput;
     [HideInInspector] public bool jumpInputStop;
 
     [Range(0, 1)] public float iceFriction = 1; //between 0 and 1, 0 means no friction
-    private bool _applyFriction;
+    private bool _isOnIce; //flag used to indicate if ice friction needs to be applied
+    public bool IsOnIce
+    {
+        get { return _isOnIce; }
+    }
+
+
 
 
     private void OnEnable()
@@ -61,16 +71,17 @@ public class PlayerController : MonoBehaviour
         {
             HandleMoveInput();
 
-            if(isGrounded)
+            if(_isGrounded)
                 anim.SetBool("isRunning", true);
         }
         else
         {
             anim.SetBool("isRunning", false);
+
         }
 
         //Want to continue applying movement if on icy ground
-        if(_applyFriction)
+        if(_isOnIce)
         {
             HandleSurfaceFriction();
         }
@@ -92,7 +103,7 @@ public class PlayerController : MonoBehaviour
         
         _moveVelocity = moveDirection.normalized * moveSpeed;
 
-        if(_applyFriction)
+        if(_isOnIce)
         {
             HandleSurfaceFriction();
         }
@@ -114,11 +125,11 @@ public class PlayerController : MonoBehaviour
 
     private void HandleJumpInput()
     {
-        isGrounded = Physics.CheckSphere(groundCheck.position, groundRadius, whatIsGround);
+        _isGrounded = Physics.CheckSphere(groundCheck.position, groundRadius, whatIsGround);
 
         //This might register before being completely on the ground. Therefore, works better to set velocity to smaller number than 0...
         //to force player down on the ground.
-        if (isGrounded && velocity.y < 0)
+        if (_isGrounded && velocity.y < 0)
         {
             //Reset velocity once grounded
             velocity.y = -2f;
@@ -134,14 +145,14 @@ public class PlayerController : MonoBehaviour
             velocity.y *= lowJumpMultiplier;
         } 
 
-        if (jumpInput && isGrounded)
+        if (jumpInput && _isGrounded)
         {
             velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
             anim.SetBool("isJumping", true);
         }
 
         //when velcity is less than 0 we are falling and want to apply more "gravity" for a snappier look
-        if (velocity.y < 0 && !isGrounded)
+        if (velocity.y < 0 && !_isGrounded)
         {
             velocity.y += fallMultiplier * gravity * Time.deltaTime;
 
@@ -181,7 +192,7 @@ public class PlayerController : MonoBehaviour
         if (other.transform.tag == "Ice")
         {
             Debug.Log("Entered ice and ice tag detected.");
-            _applyFriction = true;
+            _isOnIce = true;
         }
     }
 
@@ -189,7 +200,7 @@ public class PlayerController : MonoBehaviour
     {
         if(other.transform.tag == "Ice")
         {
-            _applyFriction = false;
+            _isOnIce = false;
         }
     }
 

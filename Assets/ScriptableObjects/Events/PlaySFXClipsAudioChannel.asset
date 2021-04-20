@@ -9,9 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 084ff6215cfd25d4ba136491ba84d502, type: 3}
-  m_Name: PolarBearSounds
+  m_Script: {fileID: 11500000, guid: f7f95be3d3c418241bff2dcd491297dc, type: 3}
+  m_Name: PlaySFXClipsAudioChannel
   m_EditorClassIdentifier: 
-  idle: {fileID: 11400000, guid: ca0dd6d04532fe248922f4041f9b8ea2, type: 2}
-  walking: {fileID: 0}
-  eating: {fileID: 11400000, guid: 409a1f611eca6d5478a3310bc7fc0ffe, type: 2}
+  description: Used to pick and play random audio clip from Sounds array.

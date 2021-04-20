@@ -478,6 +478,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3247350068946342198, guid: d30e8581b1421ac4cbf69550dfe6bd05, type: 3}
+      propertyPath: _playerSFXRandomChannel
+      value: 
+      objectReference: {fileID: 11400000, guid: 20e686d4441509541abffdcc83109955, type: 2}
     - target: {fileID: 3247350068946342199, guid: d30e8581b1421ac4cbf69550dfe6bd05, type: 3}
       propertyPath: m_Name
       value: Player Polar Bear
@@ -1125,11 +1129,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4791622373375407944, guid: 9eac4dc6d29b3a84c81a55e3669f52ce, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.0000000042877084
+      value: -0.0000000042877084
       objectReference: {fileID: 0}
     - target: {fileID: 4791622373375407944, guid: 9eac4dc6d29b3a84c81a55e3669f52ce, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -3.453679e-10
+      value: 3.453679e-10
       objectReference: {fileID: 0}
     - target: {fileID: 4791622373846951765, guid: 9eac4dc6d29b3a84c81a55e3669f52ce, type: 3}
       propertyPath: m_Name
@@ -2559,11 +2563,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2168928552065797908, guid: 3e5685dab45803a49af7f200dcf3c04b, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.000000008575417
+      value: -0.000000008575417
       objectReference: {fileID: 0}
     - target: {fileID: 2168928552065797908, guid: 3e5685dab45803a49af7f200dcf3c04b, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -6.907358e-10
+      value: 6.907358e-10
       objectReference: {fileID: 0}
     - target: {fileID: 2168928552065797908, guid: 3e5685dab45803a49af7f200dcf3c04b, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -5580,6 +5584,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 507103212443801944, guid: 72f6c7d3c393a604f8f8aae31ea2ef0e, type: 3}
+      propertyPath: _playSFXRandomEvent
+      value: 
+      objectReference: {fileID: 11400000, guid: 20e686d4441509541abffdcc83109955, type: 2}
     - target: {fileID: 507103212443801945, guid: 72f6c7d3c393a604f8f8aae31ea2ef0e, type: 3}
       propertyPath: m_RootOrder
       value: 14

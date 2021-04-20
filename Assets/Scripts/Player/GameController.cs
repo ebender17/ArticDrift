@@ -4,6 +4,7 @@ public class GameController : MonoBehaviour
 {
     private CharacterController _cc;
     private PlayerController _playerController;
+    private AnimalSoundsManager _animalSoundManager;
     public int collectableCount { get; private set; } = 0;
     public const int MAX_HEALTH = 100;
     public const int FALL_DAMAGE = 20;
@@ -19,6 +20,7 @@ public class GameController : MonoBehaviour
         set { _currentCheckpoint = value; }
     }
 
+
     [Header("Broadcasting on")]
     //Listening in UI Manager
     [SerializeField] private IntEventChannelSO _changeScoreUIEvent;
@@ -30,6 +32,7 @@ public class GameController : MonoBehaviour
     {
         _cc = GetComponent<CharacterController>();
         _playerController = GetComponent<PlayerController>();
+        _animalSoundManager = GetComponent<AnimalSoundsManager>();
 
         _currentHealth = MAX_HEALTH;
         _changeHealthUIEvent.RaiseEvent(_currentHealth);
@@ -98,6 +101,8 @@ public class GameController : MonoBehaviour
         {
             collectableCount++;
             _changeScoreUIEvent.RaiseEvent(collectableCount);
+
+            _animalSoundManager.PlayFishPickup();
 
             Destroy(other.gameObject);
         }

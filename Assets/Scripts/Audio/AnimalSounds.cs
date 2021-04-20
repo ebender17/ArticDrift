@@ -6,7 +6,12 @@ using UnityEngine;
 public class AnimalSounds : ScriptableObject
 {
     public Sound idle;
-    public Sound walking;
-    public Sound eating;
+    public Sound fishPickup;
+    public Sound iceJump;
+    public Sound iceLand;
+    public Sound snowJump;
+    public Sound snowLand;
+    public Sound[] snowFootsteps;
+    public Sound[] iceFootsteps;
     
 }
