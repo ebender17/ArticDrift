@@ -19,4 +19,4 @@ MonoBehaviour:
   pitch: 1
   loop: 0
   soundDistance: 7
-  spatialBlend: 1
+  spatialBlend: 0

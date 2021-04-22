@@ -10,10 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 68fcb27fde79e6642a3f1a40e5fdec28, type: 3}
-  m_Name: ArticFoxDialogue
+  m_Name: ArcticWolfDialogue
   m_EditorClassIdentifier: 
-  _actor: {fileID: 11400000, guid: 6b1c1ffff82fcc34e8aa3874265c25b7, type: 2}
+  _actor: {fileID: 11400000, guid: 445665e2d2544fd4195a5ab1197f6ff4, type: 2}
   _dialogueLines:
-  - Are you going out to collect food? Be careful on your journey!
-  - The warm temperatures are causing ice to melt. Be careful where you step.
+  - These warmer temperatures are really changing things around here. There is less
+    and less ice every year.
+  - 'Not only that, I saw some humans building mines the other day. '
+  - It scared the artic hare population I normally hunt right out of the area.
+  - I don't know what I will do now...
   _dialogueType: 0

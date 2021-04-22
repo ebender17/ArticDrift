@@ -18,6 +18,7 @@ public class PlayerController : MonoBehaviour
 
     public float gravity = -9.81f;
     [HideInInspector] public Vector3 velocity;
+    private bool _isJumping;
     private bool _isGrounded;
     public bool IsGrounded
     {
@@ -71,8 +72,13 @@ public class PlayerController : MonoBehaviour
         {
             HandleMoveInput();
 
-            if(_isGrounded)
+
+            //if(!_isJumping)
+            if (_isGrounded)
                 anim.SetBool("isRunning", true);
+            else
+                anim.SetBool("isRunning", false);
+        
         }
         else
         {
@@ -85,8 +91,7 @@ public class PlayerController : MonoBehaviour
         {
             HandleSurfaceFriction();
         }
-            
-
+        
         HandleJumpInput();
     }
 
@@ -134,6 +139,7 @@ public class PlayerController : MonoBehaviour
             //Reset velocity once grounded
             velocity.y = -2f;
             anim.SetBool("isJumping", false);
+            _isJumping = false;
             
         }
 
@@ -149,6 +155,7 @@ public class PlayerController : MonoBehaviour
         {
             velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
             anim.SetBool("isJumping", true);
+            _isJumping = true;
         }
 
         //when velcity is less than 0 we are falling and want to apply more "gravity" for a snappier look
@@ -191,7 +198,6 @@ public class PlayerController : MonoBehaviour
     {
         if (other.transform.tag == "Ice")
         {
-            Debug.Log("Entered ice and ice tag detected.");
             _isOnIce = true;
         }
     }

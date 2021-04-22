@@ -10,11 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 68fcb27fde79e6642a3f1a40e5fdec28, type: 3}
-  m_Name: PenguinDialogue
+  m_Name: ArcticFoxDialogue2
   m_EditorClassIdentifier: 
-  _actor: {fileID: 11400000, guid: 192d4e302fda3654eb37bda68a8ee82a, type: 2}
+  _actor: {fileID: 11400000, guid: 6b1c1ffff82fcc34e8aa3874265c25b7, type: 2}
   _dialogueLines:
-  - Are you going out to collect food? Be careful on your journey!
-  - The warm temperatures are causing ice to melt. I understand you are hungry, but
-    be careful!
-  _dialogueType: 3
+  - Hey there! Be real careful crossing ahead. I heard the ice is melting in large
+    sheets.
+  _dialogueType: 0

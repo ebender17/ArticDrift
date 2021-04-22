@@ -10,6 +10,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e6310b7f68d2922429d8c5cb7dc8ff83, type: 3}
-  m_Name: Penguin
+  m_Name: ArcticWolf
   m_EditorClassIdentifier: 
-  _actorName: Penguin
+  _actorName: Arctic Wolf

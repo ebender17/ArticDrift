@@ -35,7 +35,6 @@ public class AnimalSoundsManager : MonoBehaviour
 
     public void PlayFootstep()
     {
-        Debug.Log("Play Snowfootstep called.");
 
         _isPlayerOnIce = _playerController.IsOnIce;
         _isPlayerGrounded = _playerController.IsGrounded;
@@ -49,7 +48,6 @@ public class AnimalSoundsManager : MonoBehaviour
     public void PlayJump()
     {
         _isPlayerOnIce = _playerController.IsOnIce;
-        _isPlayerGrounded = _playerController.IsGrounded;
 
         if (!_isPlayerOnIce)
             _playSFXChannel.RaiseEvent(_animalSounds.snowJump, transform.position);
@@ -59,8 +57,7 @@ public class AnimalSoundsManager : MonoBehaviour
 
     public void PlayLand()
     {
-        _isPlayerOnIce = _playerController.IsOnIce;
-        _isPlayerGrounded = _playerController.IsGrounded;
+        //_isPlayerOnIce = _playerController.IsOnIce;
 
         if (!_isPlayerOnIce)
             _playSFXChannel.RaiseEvent(_animalSounds.snowLand, transform.position);

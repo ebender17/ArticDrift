@@ -115,12 +115,10 @@ public class AudioManager : MonoBehaviour
         Sound audio = GetRandomClip(clips);
         PlaySound(audio, pos);
 
-        Debug.Log("Select Sound called.");
     }
 
     private Sound GetRandomClip(Sound[] clips)
     {
-        Debug.Log("Get Random Clip called.");
         return clips[UnityEngine.Random.Range(0, clips.Length)]; 
     }
 

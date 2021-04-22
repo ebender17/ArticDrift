@@ -64,7 +64,6 @@ public class UIManager : MonoBehaviour
     private UIHealthManager _healthController = default;
     [SerializeField] private UIDialogueManager _dialoguePanel = default;
     [SerializeField] private UIInteractionManager _interactionPanel = default;
-    [SerializeField] private GameObject _levelCompletePanel = default;
 
     private void ChangeScoreUI(int value)
     {
@@ -76,6 +75,7 @@ public class UIManager : MonoBehaviour
         _gameController.FillGameResultPanel(isWon, playerScore);
         _gameController.gameObject.SetActive(true);
         _scoreController.gameObject.SetActive(false);
+        _healthController.gameObject.SetActive(false);
     }
 
     private void ChangeHealthUI(int value)

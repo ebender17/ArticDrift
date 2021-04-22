@@ -70,8 +70,6 @@ public class GameController : MonoBehaviour
         {
             _lastDamageTime = Time.time;
 
-            Debug.Log("Player taken damage!");
-
             _currentHealth -= damage;
 
             _changeHealthUIEvent.RaiseEvent(_currentHealth);

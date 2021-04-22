@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e6310b7f68d2922429d8c5cb7dc8ff83, type: 3}
   m_Name: Sign
   m_EditorClassIdentifier: 
-  _actorName: 
+  _actorName: North Pole Notice
